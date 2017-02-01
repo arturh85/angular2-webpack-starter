@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
   NgModule,
-  ApplicationRef
+  ApplicationRef, Injectable
 } from '@angular/core';
 import {
   removeNgStyles,
@@ -29,8 +29,17 @@ import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 
+import { StoreModule } from '@ngrx/store';
+import { Actions, Effect, EffectsModule } from '@ngrx/effects';
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import reducer from './app.store';
+
+@Injectable()
+export class MyEffect{
+  constructor(private actions$: Actions) { }
+
+}
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -60,7 +69,9 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    StoreModule.provideStore(reducer),
+    EffectsModule.run(MyEffect), // works if we comment out this line
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
