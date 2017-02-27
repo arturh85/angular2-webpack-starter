@@ -1,7 +1,7 @@
 import { ActionReducer, combineReducers } from '@ngrx/store';
 
 interface State {
-    foo: number
+    foo: number;
 }
 
 const reducers = {

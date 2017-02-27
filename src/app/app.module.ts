@@ -34,12 +34,7 @@ import { Actions, Effect, EffectsModule } from '@ngrx/effects';
 import '../styles/styles.scss';
 import '../styles/headings.css';
 import reducer from './app.store';
-
-@Injectable()
-export class MyEffect{
-  constructor(private actions$: Actions) { }
-
-}
+import { MyEffect } from './my.effect';
 
 // Application wide providers
 const APP_PROVIDERS = [
